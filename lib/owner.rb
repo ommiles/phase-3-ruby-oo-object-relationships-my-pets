@@ -1,7 +1,6 @@
 class Owner
 
   @@all=[]
-  # @cats=[]
 
   attr_reader :name, :species
 
@@ -43,5 +42,28 @@ class Owner
   def buy_dog(name)
     dog = Dog.new(name, self)
     self.dogs<<dog
+  end
+
+  def walk_dogs
+    self.dogs.each{|dog| dog.mood="happy"}
+  end
+
+  def feed_cats
+    self.cats.each{|cat| cat.mood="happy"}
+  end
+
+  def sell_pets
+    # self.dogs.each{|dog| dog.mood="nervous" + dog.owner=nil}
+    # self.cats.each{|cat| cat.mood="nervous" + cat.owner=nil}
+    pets = self.dogs + self.cats
+
+    pets.each do |pet|
+      pet.mood = "nervous"
+      pet.owner = nil
+    end
+  end
+
+  def list_pets
+    "I have #{self.dogs.count} dog(s), and #{self.cats.count} cat(s)."
   end
 end
